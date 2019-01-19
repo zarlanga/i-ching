@@ -141,9 +141,9 @@
                     //alert("hex" + hex + "mut" + mut);
 
                     var rawFile = new XMLHttpRequest();
-                    var tx = "https://zarlanga.github.io/i-ching/public_html/Testos/Hex" + hex;
-                    //var tx = "./Testos/hex" + hex;
-                    tx += mut !== undefined ? "lin" + mut : "";
+                    var tx = "https://zarlanga.github.io/i-ching/public_html/Testos/Hex" ;
+                    //var tx = "./Testos/hex";
+                    tx += mut !== undefined ?  hex+"lin" + mut : "a"+ hex;
                     tx += ".txt";
                     var muta = mut !== undefined ? mut : "";
 
