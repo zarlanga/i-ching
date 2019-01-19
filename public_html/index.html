@@ -177,6 +177,7 @@
                 }
 
                 mostrarLineas(ac) {
+                    let bandera=false;
 
 
                     this.tLineas[this.tLineas.length] = ac;
@@ -230,14 +231,22 @@
                         this.traerTexto(hexagramas[this.tTrigramas[0] - 1][this.tTrigramas[1] - 1]);
 
                         //alert(this.tMutantes.length);
+                        
+                        bandera = false;
                         for (var i = 0; i < this.tMutantes.length; i++) {
                             //alert(this.tMutantes[i])
-                            $(".monedas").prepend("<p>" + this.tMutantes[i] + "</p>");
+                            //$(".monedas").prepend("<p>" + this.tMutantes[i] + "</p>");
                             if (this.tMutantes[i]) {
                                 this.traerTexto(hexagramas[this.tTrigramas[0] - 1][this.tTrigramas[1] - 1], i + 1);
+                                bandera=true;
                             }
 
                         }
+                        
+                        if (!bandera) {
+                            $("#testo1").append("No hay informacion de lineas");
+                        }
+                        
                         $(".monedas").prepend("<p>///</p>");
                         //$(".monedas p").remove();
                         //agregar aca que el boton limpie la imagen (y borre el array?)
