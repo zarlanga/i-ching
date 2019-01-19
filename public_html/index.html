@@ -4,6 +4,38 @@
         <title>I-Ching /// Huizi's toolbox</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Start 1FreeCounter.com code -->
+
+        <script language="JavaScript">
+            var data = '&r=' + escape(document.referrer)
+                    + '&n=' + escape(navigator.userAgent)
+                    + '&p=' + escape(navigator.userAgent)
+                    + '&g=' + escape(document.location.href);
+
+            if (navigator.userAgent.substring(0, 1) > '3')
+                data = data + '&sd=' + screen.colorDepth
+                        + '&sw=' + escape(screen.width + 'x' + screen.height);
+
+            document.write('<a href="http://www.1freecounter.com/stats.php?i=140283" target=\"_blank\" >');
+            document.write('<img alt="Free Counter" border=0 hspace=0 ' + 'vspace=0 src="http://www.1freecounter.com/counter.php?i=140283' + data + '">');
+            document.write('</a>');
+        </script>
+
+        <!-- End 1FreeCounter.com code -->
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132762032-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-132762032-1');
+        </script>
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
 
@@ -141,9 +173,9 @@
                     //alert("hex" + hex + "mut" + mut);
 
                     var rawFile = new XMLHttpRequest();
-                    var tx = "https://zarlanga.github.io/i-ching/public_html/Testos/Hex" ;
+                    var tx = "https://zarlanga.github.io/i-ching/public_html/Testos/Hex";
                     //var tx = "./Testos/hex";
-                    tx += mut !== undefined ?  hex+"lin" + mut : "a"+ hex;
+                    tx += mut !== undefined ? hex + "lin" + mut : "a" + hex;
                     tx += ".txt";
                     var muta = mut !== undefined ? mut : "";
 
@@ -177,17 +209,17 @@
                 }
 
                 mostrarLineas(ac) {
-                    let bandera=false;
+                    let bandera = false;
 
 
                     this.tLineas[this.tLineas.length] = ac;
-                    
+
                     this.tMutantes[this.tMutantes.length] = ac == 6 || ac == 9;
                     /*if (ac == 6 || ac == 9) {
-                        this.tMutantes[this.tMutantes.length] = true;
-                    } else {
-                        this.tMutantes[this.tMutantes.length] = false;
-                    }*/
+                     this.tMutantes[this.tMutantes.length] = true;
+                     } else {
+                     this.tMutantes[this.tMutantes.length] = false;
+                     }*/
                     switch (ac) {
                         case 6:
                             //$(".monedas").prepend("<p>- -.</p>");
@@ -231,22 +263,22 @@
                         this.traerTexto(hexagramas[this.tTrigramas[0] - 1][this.tTrigramas[1] - 1]);
 
                         //alert(this.tMutantes.length);
-                        
+
                         bandera = false;
                         for (var i = 0; i < this.tMutantes.length; i++) {
                             //alert(this.tMutantes[i])
                             //$(".monedas").prepend("<p>" + this.tMutantes[i] + "</p>");
                             if (this.tMutantes[i]) {
                                 this.traerTexto(hexagramas[this.tTrigramas[0] - 1][this.tTrigramas[1] - 1], i + 1);
-                                bandera=true;
+                                bandera = true;
                             }
 
                         }
-                        
+
                         if (!bandera) {
                             $("#testo1").append("No hay informacion de lineas");
                         }
-                        
+
                         $(".monedas").prepend("<p>///</p>");
                         //$(".monedas p").remove();
                         //agregar aca que el boton limpie la imagen (y borre el array?)
@@ -367,5 +399,7 @@
              return Math.floor(Math.random() *2);
              }*/
         </script>
+
+
     </body>
 </html>
