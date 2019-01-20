@@ -90,11 +90,7 @@
              str += "}";
              
              $(".monedas").prepend(str); */
-            //alert(str); 
-
-
-
-
+            
             const hexagramas = [[1, 34, 5, 26, 11, 9, 14, 43],
                 [25, 51, 3, 27, 24, 42, 21, 17],
                 [6, 40, 29, 4, 7, 59, 64, 47],
@@ -104,10 +100,7 @@
                 [13, 55, 63, 22, 36, 37, 30, 49],
                 [10, 54, 60, 41, 19, 61, 38, 58]];
 
-
-
-
-
+            
             class Tirada {
 
                 constructor() {
@@ -116,8 +109,6 @@
                     this.tLineas = [];
                     //var _nroLinea;
                     this.tMonedas = [];
-
-
                 }
 
                 dibujarLinea(i, mo) {
@@ -134,7 +125,7 @@
                     ctx.moveTo(xI, yL);
                     if (mo % 2 != 0) {
                         ctx.lineTo(xF, yL);
-                        ctx.stroke();
+                        
                     } else {
                         ctx.lineTo(xI * 3, yL);
                         ctx.stroke();
@@ -142,6 +133,23 @@
                         ctx.lineTo(xF, yL);
                     }
                     ctx.stroke();
+                    
+                    ctx.beginPath();
+                    
+                    ctx.strokeStyle = "SteelBlue";
+                    ctx.lineWidth = 5;
+                    if (mo == 9) {
+                        ctx.arc(xI*4, yL, 25, 0, 2 * Math.PI);
+                        ctx.stroke();
+                    }
+                    
+                    if (mo == 6) {
+                        ctx.moveTo(xI*4-25, yL-25);
+                        ctx.lineTo(xI*4+25, yL+25);
+                        ctx.moveTo(xI*4+25, yL-25);
+                        ctx.lineTo(xI*4-25, yL+25);
+                        ctx.stroke();
+                    }
                 }
 
                 borrarPantalla() {
@@ -154,8 +162,6 @@
                 //************************************************
 
 
-
-
                 resetear() {
                     $(".tirador").attr("disabled", false);
                     $(".reseteador").attr("disabled", true);
@@ -166,12 +172,10 @@
                     for (var i = 1; i <= 6; i++) {
                         $("#testo" + i).text("");
                     }
-
                 }
 
                 traerTexto(hex, mut) {
                     //alert("hex" + hex + "mut" + mut);
-
                     var rawFile = new XMLHttpRequest();
                     var tx = "https://zarlanga.github.io/i-ching/public_html/Testos/Hex";
                     //var tx = "./Testos/hex";
@@ -179,7 +183,6 @@
                     tx += ".txt";
                     var muta = mut !== undefined ? mut : "";
 
-                    //$("#testo").text(tx);
                     rawFile.open("GET", tx, true);
                     rawFile.onreadystatechange = function () {
                         if (rawFile.readyState === 4) {
@@ -189,15 +192,11 @@
                             $("#testo" + muta).append("<br/><br/>");
                         }
                     };
-                    //alert(d);
                     rawFile.send();
-                    //alert("mando archivo");
                 }
 
                 calcularTrigrama(inf) {
-
                     let tr = inf ? 3 : 0;
-
                     return this.tLineas[0 + tr] % 2 == 0 ?
                             this.tLineas[1 + tr] % 2 == 0 ?
                             this.tLineas[2 + tr] % 2 == 0 ? "5" : "4"
@@ -205,87 +204,42 @@
                             : this.tLineas[1 + tr] % 2 == 0 ?
                             this.tLineas[2 + tr] % 2 == 0 ? "2" : "7"
                             : this.tLineas[2 + tr] % 2 == 0 ? "8" : "1"
+                }
 
+                definirHexagrama() {
+                    let bandera = false;
+
+                    $(".tirador").attr("disabled", true);
+                    $(".reseteador").attr("disabled", false);
+
+                    this.tTrigramas[0] = this.calcularTrigrama(0);
+                    this.tTrigramas[1] = this.calcularTrigrama(1);
+
+                    this.traerTexto(hexagramas[this.tTrigramas[0] - 1][this.tTrigramas[1] - 1]);
+
+                    bandera = false;
+                    for (var i = 0; i < this.tMutantes.length; i++) {
+                        //$(".monedas").prepend("<p>" + this.tMutantes[i] + "</p>");
+                        if (this.tMutantes[i]) {
+                            this.traerTexto(hexagramas[this.tTrigramas[0] - 1][this.tTrigramas[1] - 1], i + 1);
+                            bandera = true;
+                        }
+                    }
+
+                    if (!bandera) {
+                        $("#testo1").append("No hay informacion de lineas");
+                    }
                 }
 
                 mostrarLineas(ac) {
-                    let bandera = false;
-
-
+                    
                     this.tLineas[this.tLineas.length] = ac;
-
                     this.tMutantes[this.tMutantes.length] = ac == 6 || ac == 9;
-                    /*if (ac == 6 || ac == 9) {
-                     this.tMutantes[this.tMutantes.length] = true;
-                     } else {
-                     this.tMutantes[this.tMutantes.length] = false;
-                     }*/
-                    switch (ac) {
-                        case 6:
-                            //$(".monedas").prepend("<p>- -.</p>");
-                            this.dibujarLinea(this.tLineas.length, ac);
-                            //alert("viejo yin " );
-                            break;
-
-                        case 7:
-                            //$(".monedas").prepend("<p>---</p>");
-                            this.dibujarLinea(this.tLineas.length, ac);
-                            //alert("joven yang ");
-                            break;
-
-                        case 8:
-                            //alert("joven yin ");
-                            //$(".monedas").prepend("<p>- -</p>");
-                            this.dibujarLinea(this.tLineas.length, ac);
-                            break;
-
-                        case 9:
-                            //$(".monedas").prepend("<p>---.</p>");
-                            this.dibujarLinea(this.tLineas.length, ac);
-                            //alert("viejo yang");
-                            break;
-
-                        default:
-                            alert("error");
-                    }
-
+                    this.dibujarLinea(this.tLineas.length, ac);
+                    
                     if (this.tLineas.length == 6) {
-
-                        $(".tirador").attr("disabled", true);
-                        $(".reseteador").attr("disabled", false);
-
-                        this.tTrigramas[0] = this.calcularTrigrama(0);
-                        this.tTrigramas[1] = this.calcularTrigrama(1);
-
-
-                        //alert("hex:" + hexagramas[this.tTrigramas[0]-1][this.tTrigramas[1]-1]+ " \n tri1: " + this.tTrigramas[0] + "\n tri2 :" + this.tTrigramas[1]);
-
-                        this.traerTexto(hexagramas[this.tTrigramas[0] - 1][this.tTrigramas[1] - 1]);
-
-                        //alert(this.tMutantes.length);
-
-                        bandera = false;
-                        for (var i = 0; i < this.tMutantes.length; i++) {
-                            //alert(this.tMutantes[i])
-                            //$(".monedas").prepend("<p>" + this.tMutantes[i] + "</p>");
-                            if (this.tMutantes[i]) {
-                                this.traerTexto(hexagramas[this.tTrigramas[0] - 1][this.tTrigramas[1] - 1], i + 1);
-                                bandera = true;
-                            }
-
-                        }
-
-                        if (!bandera) {
-                            $("#testo1").append("No hay informacion de lineas");
-                        }
-
-                        $(".monedas").prepend("<p>///</p>");
-                        //$(".monedas p").remove();
-                        //agregar aca que el boton limpie la imagen (y borre el array?)
+                        this.definirHexagrama();
                     }
-
-
-
                 }
 
                 calcularLineas(arr) {
