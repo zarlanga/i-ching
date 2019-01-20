@@ -5,24 +5,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- Start 1FreeCounter.com code -->
-
-        <script language="JavaScript">
-            var data = '&r=' + escape(document.referrer)
-                    + '&n=' + escape(navigator.userAgent)
-                    + '&p=' + escape(navigator.userAgent)
-                    + '&g=' + escape(document.location.href);
-
-            if (navigator.userAgent.substring(0, 1) > '3')
-                data = data + '&sd=' + screen.colorDepth
-                        + '&sw=' + escape(screen.width + 'x' + screen.height);
-
-            document.write('<a href="http://www.1freecounter.com/stats.php?i=140283" target=\"_blank\" >');
-            document.write('<img alt="Free Counter" border=0 hspace=0 ' + 'vspace=0 src="http://www.1freecounter.com/counter.php?i=140283' + data + '">');
-            document.write('</a>');
-        </script>
-
-        <!-- End 1FreeCounter.com code -->
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132762032-1"></script>
@@ -54,14 +36,24 @@
 
             //***************************************
         </script>
+        <style>
+            button{
+                background-color: DarkSlateGray;
+                color:white;
+            }
+            button:hover {
+                background-color: black;
+                color:gold;
+            }
+        </style>
     </head>
-    <body>
+    <body style="background-color: silver">
 
 
 
-        <button class="tirador">Tirar monedas.</button> <button class="reseteador" disabled="disabled">resetear</button><br>
+        <button class="tirador" style="width:200px; height:70px; margin:0px">Tirar monedas.</button><button class="reseteador" style="width:200px; height:70px;margin:0px" disabled="disabled">resetear</button><br>
 
-        <canvas id="cnv" width="400" height="400" style="background-color:powderblue;" ></canvas>
+        <canvas id="cnv" width="400" height="400" style="background-color:black;" ></canvas>
         <div style="float:right; width:50%">
             <div id="testo" style="width:90%; text-align:Center"></div>
             <div id="testo1" style="width:90%; text-align:Center"></div>
@@ -121,7 +113,7 @@
 
                     ctx.beginPath();
                     ctx.lineWidth = 7;
-                    ctx.strokeStyle = "black";
+                    ctx.strokeStyle = "gold";
                     ctx.moveTo(xI, yL);
                     if (mo % 2 != 0) {
                         ctx.lineTo(xF, yL);
@@ -136,7 +128,7 @@
                     
                     ctx.beginPath();
                     
-                    ctx.strokeStyle = "SteelBlue";
+                    ctx.strokeStyle = "coral";
                     ctx.lineWidth = 5;
                     if (mo == 9) {
                         ctx.arc(xI*4, yL, 25, 0, 2 * Math.PI);
@@ -155,7 +147,7 @@
                 borrarPantalla() {
                     var c = document.getElementById("cnv");
                     var ctx = c.getContext("2d");
-                    ctx.fillStyle = "powderblue";
+                    ctx.fillStyle = "black";
                     ctx.fillRect(0, 0, 400, 400);
                 }
 
@@ -354,6 +346,24 @@
              }*/
         </script>
 
+        <!-- Start 1FreeCounter.com code -->
+
+        <script language="JavaScript">
+            var data = '&r=' + escape(document.referrer)
+                    + '&n=' + escape(navigator.userAgent)
+                    + '&p=' + escape(navigator.userAgent)
+                    + '&g=' + escape(document.location.href);
+
+            if (navigator.userAgent.substring(0, 1) > '3')
+                data = data + '&sd=' + screen.colorDepth
+                        + '&sw=' + escape(screen.width + 'x' + screen.height);
+
+            document.write('<a href="http://www.1freecounter.com/stats.php?i=140283" target=\"_blank\" >');
+            document.write('<img alt="Free Counter" border=0 hspace=0 ' + 'vspace=0 src="http://www.1freecounter.com/counter.php?i=140283' + data + '">');
+            document.write('</a>');
+        </script>
+
+        <!-- End 1FreeCounter.com code -->
 
     </body>
 </html>
