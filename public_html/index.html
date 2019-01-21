@@ -40,9 +40,16 @@
             //***************************************
         </script>
         <style>
+            *{
+                margin:0px;
+                padding:0px;
+            }
             button{
                 background-color: DarkSlateGray;
                 color:white;
+                width:200px; 
+                height:70px;
+                margin:0px
             }
             button:hover {
                 background-color: black;
@@ -56,6 +63,9 @@
             }
             
             @media screen and (max-width: 650px) {
+                button {
+                    width:49.5%;
+                }
                 .contaTesto {
                    position:absolute;
                    top:0;
@@ -77,7 +87,7 @@
 
 
 
-        <button class="tirador" style="width:200px; height:70px; margin:0px">Tirar monedas.</button><button class="reseteador" style="width:200px; height:70px;margin:0px" disabled="disabled">Resetear</button><br>
+        <button class="tirador" >Tirar monedas.</button><button class="reseteador" disabled="disabled">Resetear</button><br>
         <br>
         <div class="contaaa" style="position:relative">
             <canvas id="cnv" width="400" height="400" style="background-color:black;" ></canvas>
