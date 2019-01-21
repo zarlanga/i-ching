@@ -59,10 +59,15 @@
             .contaTesto {
             float:right; 
             width:50% ;   
-                display: none;
+               opacity:0;
+               -webkit-transition: opacity 5s; /* Safari */
+                transition: opacity 5s;
             }
             
-            @media screen and (max-width: 650px) {
+            #cnv1 {
+                display:none;
+            }
+            @media screen and (max-width: 800px) {
                 button {
                     width:49.5%;
                 }
@@ -79,6 +84,9 @@
                   
                    
                 }
+                #cnv1{
+                    display:inline-block;
+                }
             }
             
         </style>
@@ -88,11 +96,11 @@
 
 
         <button class="tirador" >Tirar monedas.</button><button class="reseteador" disabled="disabled">Resetear</button><br>
-        <br>
         <div class="contaaa" style="position:relative">
             <canvas id="cnv" width="400" height="400" style="background-color:black;" ></canvas>
             <div class="contaTesto" >
-                <div id="testo" style="width:90%; text-align:Center"></div>
+                <div id="testo" style="width:90%; text-align:Center">
+                    <canvas id="cnv1" width="100" height="100" style="background-color:black; float:left;" ></canvas></div>
                 <div id="testo1" style="width:90%; text-align:Center"></div>
                 <div id="testo2" style="width:90%; text-align:Center"></div>
                 <div id="testo3" style="width:90%; text-align:Center"></div>
@@ -180,6 +188,7 @@
                         ctx.lineTo(xI * 4 - 25, yL + 25);
                         ctx.stroke();
                     }
+                    
                 }
 
                 borrarPantalla() {
@@ -259,7 +268,15 @@
                     if (!bandera) {
                         $("#testo1").append("No hay informacion de lineas");
                     }
-                    $(".contaTesto").fadeIn(5000);
+                    $(".contaTesto").css("opacity","1");
+                    //$(".contaTesto").fadeIn(5000);
+                    
+                    
+                        var c = document.getElementById("cnv");
+                         var c1= document.getElementById("cnv1");
+                         var ctx1=c1.getContext("2d");
+                         ctx1.drawImage(c, 0, 0,100,100);
+                    
                 }
 
                 mostrarLineas(ac) {
