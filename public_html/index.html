@@ -48,23 +48,48 @@
                 background-color: black;
                 color:gold;
             }
+            
+            .contaTesto {
+            float:right; 
+            width:50% ;   
+                display: none;
+            }
+            
+            @media screen and (max-width: 650px) {
+                .contaTesto {
+                   position:absolute;
+                   top:0;
+                   left:0;
+                   float:none;
+                   width:100%;
+                   
+                   z-index:1;
+                   color:black;
+                   background-color:gold;
+                  
+                   
+                }
+            }
+            
         </style>
     </head>
     <body style="background-color: silver">
 
 
 
-        <button class="tirador" style="width:200px; height:70px; margin:0px">Tirar monedas.</button><button class="reseteador" style="width:200px; height:70px;margin:0px" disabled="disabled">resetear</button><br>
-
-        <canvas id="cnv" width="400" height="400" style="background-color:black;" ></canvas>
-        <div style="float:right; width:50%">
-            <div id="testo" style="width:90%; text-align:Center"></div>
-            <div id="testo1" style="width:90%; text-align:Center"></div>
-            <div id="testo2" style="width:90%; text-align:Center"></div>
-            <div id="testo3" style="width:90%; text-align:Center"></div>
-            <div id="testo4" style="width:90%; text-align:Center"></div>
-            <div id="testo5" style="width:90%; text-align:Center"></div>
-            <div id="testo6" style="width:90%; text-align:Center"></div>
+        <button class="tirador" style="width:200px; height:70px; margin:0px">Tirar monedas.</button><button class="reseteador" style="width:200px; height:70px;margin:0px" disabled="disabled">Resetear</button><br>
+        <br>
+        <div class="contaaa" style="position:relative">
+            <canvas id="cnv" width="400" height="400" style="background-color:black;" ></canvas>
+            <div class="contaTesto" >
+                <div id="testo" style="width:90%; text-align:Center"></div>
+                <div id="testo1" style="width:90%; text-align:Center"></div>
+                <div id="testo2" style="width:90%; text-align:Center"></div>
+                <div id="testo3" style="width:90%; text-align:Center"></div>
+                <div id="testo4" style="width:90%; text-align:Center"></div>
+                <div id="testo5" style="width:90%; text-align:Center"></div>
+                <div id="testo6" style="width:90%; text-align:Center"></div>
+            </div>
         </div>
         <div class="monedas"> <span class="m0"></span><span class="m1"></span><span class="m2"></span></div>
 
@@ -85,7 +110,7 @@
              str += "}";
              
              $(".monedas").prepend(str); */
-            
+
             const hexagramas = [[1, 34, 5, 26, 11, 9, 14, 43],
                 [25, 51, 3, 27, 24, 42, 21, 17],
                 [6, 40, 29, 4, 7, 59, 64, 47],
@@ -95,7 +120,7 @@
                 [13, 55, 63, 22, 36, 37, 30, 49],
                 [10, 54, 60, 41, 19, 61, 38, 58]];
 
-            
+
             class Tirada {
 
                 constructor() {
@@ -120,7 +145,7 @@
                     ctx.moveTo(xI, yL);
                     if (mo % 2 != 0) {
                         ctx.lineTo(xF, yL);
-                        
+
                     } else {
                         ctx.lineTo(xI * 3, yL);
                         ctx.stroke();
@@ -128,21 +153,21 @@
                         ctx.lineTo(xF, yL);
                     }
                     ctx.stroke();
-                    
+
                     ctx.beginPath();
-                    
+
                     ctx.strokeStyle = "coral";
                     ctx.lineWidth = 5;
                     if (mo == 9) {
-                        ctx.arc(xI*4, yL, 25, 0, 2 * Math.PI);
+                        ctx.arc(xI * 4, yL, 25, 0, 2 * Math.PI);
                         ctx.stroke();
                     }
-                    
+
                     if (mo == 6) {
-                        ctx.moveTo(xI*4-25, yL-25);
-                        ctx.lineTo(xI*4+25, yL+25);
-                        ctx.moveTo(xI*4+25, yL-25);
-                        ctx.lineTo(xI*4-25, yL+25);
+                        ctx.moveTo(xI * 4 - 25, yL - 25);
+                        ctx.lineTo(xI * 4 + 25, yL + 25);
+                        ctx.moveTo(xI * 4 + 25, yL - 25);
+                        ctx.lineTo(xI * 4 - 25, yL + 25);
                         ctx.stroke();
                     }
                 }
@@ -224,14 +249,15 @@
                     if (!bandera) {
                         $("#testo1").append("No hay informacion de lineas");
                     }
+                    $(".contaTesto").fadeIn(5000);
                 }
 
                 mostrarLineas(ac) {
-                    
+
                     this.tLineas[this.tLineas.length] = ac;
                     this.tMutantes[this.tMutantes.length] = ac == 6 || ac == 9;
                     this.dibujarLinea(this.tLineas.length, ac);
-                    
+
                     if (this.tLineas.length == 6) {
                         this.definirHexagrama();
                     }
@@ -255,12 +281,12 @@
 
                     if (this.tMonedas.length < 3) {
                         this.tMonedas[this.tMonedas.length] = this.tirarMoneda();
-                        $(".m" + (this.tMonedas.length - 1)).text(this.tMonedas[this.tMonedas.length - 1]);
+                        //$(".m" + (this.tMonedas.length - 1)).text(this.tMonedas[this.tMonedas.length - 1]);
 
                     } else {
                         this.calcularLineas(this.tMonedas);
                         this.tMonedas = [];
-                       // $(".m0,.m1,.m2").text("");
+                        // $(".m0,.m1,.m2").text("");
                     }
 
                 }
